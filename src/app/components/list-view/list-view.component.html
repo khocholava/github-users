@@ -1,0 +1,32 @@
+<div class="user-list-container">
+  <div class="user-list">
+    <ng-container *ngFor="let user of users$ | async">
+      <!--          <div class="user-list-item" [style.background-image]="'url('+user.avatar_url+')'">-->
+      <!--            <div class="avatar-container"></div>-->
+      <!--          </div>-->
+      <div class="user-list-item">
+        <img
+          [src]="user.avatar_url"
+          alt="User avatar" class="avatar">
+        <div class="info">
+          <div class="title-container">
+            <h4>{{user.login}}</h4>
+            <p>Type: {{user.type}}</p>
+          </div>
+          <div class="not-found" *ngIf="user.repos.length === 0">Repo not found</div>
+          <div class="repos">
+            <p>Repos</p>
+            <ul>
+              <ng-container *ngFor="let repo of user.repos.slice(0,3)">
+                <li>
+                  <a [href]="repo.url | safeUrl">{{repo.name}}</a>
+                </li>
+              </ng-container>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </ng-container>
+  </div>
+</div>

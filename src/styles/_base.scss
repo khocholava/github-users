@@ -6,6 +6,7 @@ $secondaryBg: #24292E;
 body,html {
   height: 100%;
   width: 100%;
+  min-height: 100%;
   background-color: $primaryBg;
 }
 
@@ -40,6 +41,14 @@ html {
   align-items: center;
 }
 
+@mixin icon-button() {
+  @include button(black, transparent, 1px solid $secondaryColor);
+  padding: 0.25rem;
+  border-radius: 50%;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
 //Reset Css
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -57,7 +66,6 @@ time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 100%;
   font: inherit;
   color: inherit;
   text-decoration: none;
@@ -80,7 +88,6 @@ blockquote, q {
 blockquote:before, blockquote:after,
 q:before, q:after {
   content: '';
-  content: none;
 }
 table {
   border-collapse: collapse;

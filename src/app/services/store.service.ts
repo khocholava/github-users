@@ -11,7 +11,8 @@ export class StoreService {
   private githubUsers: Array<User> = [];
   private users$ = new BehaviorSubject<Array<User>>([]);
   private userFollowers: Array<User> = [];
-  private singleUser: User = {};
+  private userFollowers$ = new BehaviorSubject<Array<User>>([]);
+  private singleUser: User;
   private userRepos: Array<Repository> = [];
   private userOrganizations: Array<Organization> = [];
 
@@ -22,13 +23,13 @@ export class StoreService {
     return this.users$.asObservable();
   }
 
+  getFollowers(): Observable<Array<User>> {
+    return this.userFollowers$.asObservable();
+  }
+
   set users(users: Array<User>) {
     this.githubUsers = users;
     this.users$.next(this.githubUsers);
-    console.log({
-      githubUsers: this.githubUsers,
-      users$: this.users
-    });
   }
 
   get users(): Array<User> {
@@ -36,7 +37,9 @@ export class StoreService {
   }
 
   set followers(followers: Array<User>) {
+    console.log(followers);
     this.userFollowers = followers;
+    this.userFollowers$.next(this.userFollowers);
   }
 
   get followers(): Array<User> {

@@ -14,6 +14,9 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { LandingComponent } from './components/landing/landing.component';
 import { CardViewComponent } from './components/card-view/card-view.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { ListViewComponent } from './components/list-view/list-view.component';
+import { SafeUrlPipe } from './safe-url.pipe';
+import { SingleUserComponent } from './components/single-user/single-user.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { LoaderComponent } from './components/loader/loader.component';
     FooterComponent,
     LandingComponent,
     CardViewComponent,
-    LoaderComponent
+    LoaderComponent,
+    ListViewComponent,
+    SafeUrlPipe,
+    SingleUserComponent
   ],
   imports: [
     BrowserModule,

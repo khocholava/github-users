@@ -1,3 +1,5 @@
+import {Repository} from './repository';
+
 export interface User {
   id: number;
   login: string;
@@ -19,5 +21,6 @@ export interface User {
   events_url: string;
   received_events_url: string;
   site_admin: boolean;
+  repos: Array<Repository>;
 }
 

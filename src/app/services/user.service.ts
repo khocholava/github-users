@@ -2,12 +2,11 @@ import {Inject, Injectable} from '@angular/core';
 import {API_BASE_URL} from '../tokens';
 import {HttpClient} from '@angular/common/http';
 import {StoreService} from './store.service';
-import {Observable} from 'rxjs';
+import {from, Observable} from 'rxjs';
 import {User} from '../models/user';
-import {tap} from 'rxjs/operators';
+import {map, mergeMap, tap, toArray} from 'rxjs/operators';
 import {Repository} from '../models/repository';
 import {Organization} from '../models/organization';
-import {GithubNetworkResponse} from '../models/network';
 
 @Injectable()
 export class UserService {
@@ -19,10 +18,21 @@ export class UserService {
   ) {
   }
 
+  // @TODO  refactor get user repos
   getUsers(): Observable<Array<User>> {
     return this.http.get<Array<User>>(`${this.baseUrl}/users`)
       .pipe(
-        tap(users => this.store.users = users)
+        mergeMap(users => from(users)),
+        mergeMap(user => this.getUserRepos(user.login)
+          .pipe(
+            map(repos => ({
+              ...user,
+              repos,
+            }))
+          )
+        ),
+        toArray(),
+        tap(users => this.store.users = users),
       );
   }
 
@@ -30,21 +40,42 @@ export class UserService {
     return this.http.get<User>(`${this.baseUrl}/users/${payload}`);
   }
 
-  searchUser(userName: string): Observable<GithubNetworkResponse> {
-    return this.http.get<GithubNetworkResponse>(`${this.baseUrl}/search/users`, {
+  searchUser(userName: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/search/users`, {
       params: {
         q: userName
       }
     }).pipe(
-      tap(
-        user => this.store.users = user.items
-      )
+      map(
+        user => user.items,
+      ),
+      mergeMap(users => from(users)),
+      mergeMap((user: any) => this.getUserRepos(user.login)
+        .pipe(
+          map(repos => ({
+            ...user,
+            repos,
+          }))
+        )
+      ),
+      toArray(),
+      tap(users => this.store.users = users)
     );
   }
 
   getUserFollowers(user: string): Observable<Array<User>> {
     return this.http.get<Array<User>>(`${this.baseUrl}/users/${user}/followers`)
       .pipe(
+        mergeMap(users => from(users)),
+        mergeMap((user: User) => this.getUserRepos(user.login)
+          .pipe(
+            map(repos => ({
+              ...user,
+              repos,
+            }))
+          )
+        ),
+        toArray(),
         tap(followers => this.store.followers = followers)
       );
   }
