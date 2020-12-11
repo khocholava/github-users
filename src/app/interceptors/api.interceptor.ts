@@ -12,7 +12,7 @@ export class ApiInterceptor implements HttpInterceptor {
 
     return next.handle(request.clone({
       setHeaders: {
-        Authorization: `Basic khocholava:Terminatori12`
+        Authorization: `***`
       }
     }));
   }
