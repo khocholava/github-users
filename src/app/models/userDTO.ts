@@ -1,6 +1,6 @@
 import {Repository} from './repository';
 
-export interface User {
+export interface UserDTO {
   id: number;
   login: string;
   avatar_url: string;
@@ -8,7 +8,7 @@ export interface User {
   followers_url: string;
   email: string;
   type: string;
-  followers: Array<User>;
+  followers: Array<UserDTO>;
   node_id: string;
   gravatar_id: string;
   html_url: string;
@@ -21,6 +21,11 @@ export interface User {
   events_url: string;
   received_events_url: string;
   site_admin: boolean;
+  bio: string;
+}
+
+export interface UserModel  extends UserDTO{
   repos: Array<Repository>;
+  bio: string;
 }
 

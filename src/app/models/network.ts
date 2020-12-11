@@ -1,7 +1,5 @@
-import {User} from './user';
-
-export interface GithubNetworkResponse {
+export interface GithubNetworkResponse<T> {
   incomplete_results: boolean;
-  items: Array<User>;
+  items: Array<T>;
   total_count: number;
 }

@@ -10,8 +10,10 @@
           alt="User avatar" class="avatar">
         <div class="info">
           <div class="title-container">
-            <h4>{{user.login}}</h4>
-            <p>Type: {{user.type}}</p>
+            <a [routerLink]="['/users', user.login]">
+              <h4>{{user.login}}</h4>
+              <p>Type: {{user.type}}</p>
+            </a>
           </div>
           <div class="not-found" *ngIf="user.repos.length === 0">Repo not found</div>
           <div class="repos">

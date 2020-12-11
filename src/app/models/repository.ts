@@ -1,4 +1,4 @@
-import {User} from './user';
+import {UserDTO} from './userDTO';
 
 export interface Repository {
   id: number;
@@ -6,7 +6,7 @@ export interface Repository {
   name: string;
   full_name: string;
   private: boolean;
-  owner: User;
+  owner: UserDTO;
   html_url: string;
   description: string;
   fork: boolean;

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import {User} from '../../models/user';
+import {UserModel} from '../../models/userDTO';
 
 @Component({
   selector: 'app-list-view',
@@ -8,9 +8,10 @@ import {User} from '../../models/user';
   styleUrls: ['./list-view.component.scss']
 })
 export class ListViewComponent implements OnInit {
-  @Input() users$: Observable<Array<User>> | undefined;
+  @Input() users$: Observable<Array<UserModel>> | undefined;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
