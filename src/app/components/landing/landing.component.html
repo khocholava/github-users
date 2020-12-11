@@ -1,0 +1,18 @@
+<app-navbar showSearch></app-navbar>
+
+<div class="wrapper">
+  <div class="landing-container">
+    <div class="header-container">
+      <h1 class="main-text">Welcome To Github Users</h1>
+      <div class="grid-view-button-container">
+        <a (click)="handleCardMode()">
+          <img class="grid-view" src="./assets/images/grid.svg" alt=""></a>
+        <a (click)="handleListMode()"><img class="grid-view" src="./assets/images/list.svg" alt=""></a>
+      </div>
+    </div>
+
+    <app-list-view *ngIf="isListMode" [users$]="users$"></app-list-view>
+    <app-card-view *ngIf=" isCardMode" [users$]="users$"></app-card-view>
+    <app-loader *ngIf="isLoading"></app-loader>
+  </div>
+</div>

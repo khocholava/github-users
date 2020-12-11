@@ -1,0 +1,80 @@
+//@import "";
+@import "src/styles/main";
+
+:host {
+
+  .wrapper {
+    @include flex(center, flex-start);
+    height: calc(100% - 160px);
+
+    .landing-container {
+      padding: .75rem;
+      height: 100%;
+      width: 1300px;
+      position: relative;
+      overflow: hidden;
+      padding-top: 2rem;
+
+    }
+
+    .main-text {
+      font-size: 2rem;
+      color: $font-color;
+      @media (max-width: 575px) {
+        font-size: 1.3rem;
+      }
+    }
+
+    .grid-switch-button {
+      @include button(inherit, transparent, none);
+
+      .grid-view {
+        background-size: 20px 30px;
+      }
+    }
+
+    .header-container {
+      @include flex(space-between, center);
+
+      &.jumbotron {
+        height: 200px;
+        background-color: #f3f3f3;
+
+        p {
+          font-size: 4rem;
+        }
+      }
+
+      .grid-view-button-container {
+
+        a {
+          cursor: pointer;
+          transition: box-shadow .35s linear;
+          border-radius: 50%;
+          :hover {
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+          }
+          &:not(:last-child) {
+            margin-right: 1rem;
+          }
+        }
+
+
+        .grid-view {
+          width: 30px;
+          height: 30px;
+        }
+      }
+
+      @media (max-width: 575px) {
+        display: flex;
+        flex-direction: column;
+        .grid-view-button-container {
+          margin-top: .5rem;
+        }
+      }
+    }
+  }
+}
+
+

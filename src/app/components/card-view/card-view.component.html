@@ -1,0 +1,25 @@
+<div class="cards">
+  <ng-container *ngFor="let user of users$| async">
+    <div class="card">
+      <div class="profile-img" [style.background-image]="'url('+user.avatar_url+')'">
+      </div>
+      <div class="card-header">
+        <a [routerLink]="['/users', user.login]">
+          <h4>{{user.login}}</h4>
+          <p>Type: {{user.type}}</p>
+        </a>
+      </div>
+      <div class="card-content">
+        <div class="not-found" *ngIf="user.repos.length === 0">Repo not found</div>
+        <ul class="user-repo-list">
+          <ng-container *ngFor="let repo of user.repos.slice(0,3)">
+            <li class=user-repo-list-item>
+              <a [href]="repo.git_url | safeUrl" target="_blank"> {{repo.name}}</a>
+            </li>
+          </ng-container>
+
+        </ul>
+      </div>
+    </div>
+  </ng-container>
+</div>
