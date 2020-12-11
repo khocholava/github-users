@@ -30,7 +30,9 @@
       </ng-container>
       <div class="user-organization-item">
         <ng-container *ngFor="let organization of organizations$ | async">
-          <img class="organization-avatar" [src]="organization.avatar_url" alt="">
+          <a [href]="organization.url">
+            <img class="organization-avatar" [src]="organization.avatar_url" alt="">
+          </a>
         </ng-container>
       </div>
     </div>
